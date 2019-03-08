@@ -1,0 +1,24 @@
+body{
+    background: lightblue;
+}
+
+.jumbotron {
+    background:black;
+    color:yellow;
+    text-align: center;
+}
+
+#main-row{
+    background: grey;
+    color: darkorange;
+    border: 2px dashed black;
+}
+   
+.row{
+    background: lightgrey;
+    color: darkorange;
+    padding: 12px;
+    border: 2px dashed black;
+    font-family: Courier;
+    font-size: 18pt;
+}
