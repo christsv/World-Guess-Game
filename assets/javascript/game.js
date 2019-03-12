@@ -1,9 +1,10 @@
 
 
 
-var wordList = ["chris", "topher", "valenzuela", "san", "chez"];
+var wordList = ["chris", "topher", "valenzuela", "san", "chez", "huhhh"];
 var chosenWord = "";
-var array = [];
+var wrongArray = [];
+var saver = [];
 
 function wordChooser (){
     // this clear array to nothing so we can add to it
@@ -20,67 +21,65 @@ function wordChooser (){
     for (var i = 0; i <chosenWord.length; i++){
         // .push concantenates "_" to the blank array
         chosenWordArray.push("_");
-      //  document.getElementById("dash").push("_"); 
-     //   console.log(document.getElementById("dash").push("_"));
-        //document.getElementById("dash").innerHTML = document.getElementById("dash").innerHTML + "_ "
+
     }
     //.join(" ") combines the array (i.e " _ _ _ _ ")
     var array = chosenWordArray.join(" ");
+
     document.getElementById("dash").innerHTML = array;
 
     console.log(chosenWord);
-    return [chosenWord, array];
+    return chosenWord;
    
 }
 
 
 // the variable "chosenWord" now has a random name. because we run function
-var word = wordChooser();
 
+var word = wordChooser();
 // this funciton checks if a letter is in the random word.
 // parameter "letter" will be used for future
 function checks(letter){
-var test =["hi", "hello dude"];
 
-test[1] = test[1].replace(test[1][6],"h");
-console.log(chosenWord);
-console.log(test);
-var ew;
-var j;
+    saver = document.getElementById("dash").innerHTML;
+//you have to split or it will read the string as a pattern therefore requiring Regexp
+    var seperate = saver.split(" ");
+    var letterinWord = false;
+    var letternotinWord = false;
+    console.log(wrongArray);
 
     for(var i = 0; i < chosenWord.length; i++){
         if (letter === chosenWord[i]) {
  
-             j = i*2;
-         
-           
-      
-//            word[1] = word[1].replace(word[1][4], letter);
-            //ew = word[1].replace(word[1][j], letter);
-//         console.log(word[1]);
-           
-           
+             seperate[i] = letter;   
+             letterinWord = true;    
         }
-        else {
-            // make a wrongGuess function
-            wrongGuess();
+        else if (letter != chosenWord[i]){
+  
+            letternotinWord = true;
         }
     }
-    word[1] = word[1].replace(word[1][1], letter);
-    //ew = word[1].replace(word[1][j], letter);
-   console.log(word);
-    document.getElementById("dash").innerHTML = word[1];
+
+    var saver = seperate.join(" ");
+    if(letterinWord){
+        correct(saver);
+    }
+    else if (letternotinWord){
+        wrongArray.push(letter);
+        wrongGuess(wrongArray);
+    }    
+
 }
 
-checks("h");
+function correct(array){
+    document.getElementById("dash").innerHTML = array;
 
-function addLetter(letter){
-
-    document.getElementById("dash").innerHTML[1] = "letter";
-    return letter;
 }
+
 //addLetter("h");
-function wrongGuess(){
+function wrongGuess(wrongArray){
+
+    document.getElementById("wrong").innerHTML = "Wrong Guess: " + wrongArray + ",";
 
 }
 
@@ -91,7 +90,9 @@ function wrongGuess(){
 document.onkeyup = function(event){
     // checks what key was pressed and placed to variable guess
     var guess = event.key;
+   checks(guess);
 
+   
 }
 
 
